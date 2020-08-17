@@ -1,8 +1,9 @@
 //Searching function
 function searchSong() {
-    document.getElementById('result-box').style.display = 'none'
+    document.getElementById("no-result").style.display='none';
+    document.getElementById('result-box').style.display = 'none';
     for (let index = 1; index <= 10; index++) {
-        document.getElementById('lyrics' + index.toString()).style.display = 'none'
+        document.getElementById('lyrics' + index.toString()).style.display = 'none';
     }
     let searchItem = document.getElementById("search-item").value;
     if (searchItem) {
@@ -17,12 +18,18 @@ function searchSong() {
 
 //Display search item 
 function displayResult(data) {
-    document.getElementById("result-box").style.display = 'block';
-    for (let index = 1; index <= 10; index++) {
-        getElements("title" + index.toString()).innerText = data.data[index - 1].title;
-        getElements("album-name" + index.toString()).innerText = data.data[index - 1].album.title;
-        getElements("artist" + index.toString()).innerText = data.data[index - 1].artist.name;
+    if(data.data.length!=0){
+        document.getElementById("result-box").style.display = 'block';
+        for (let index = 1; index <= 10; index++) {
+            getElements("title" + index.toString()).innerText = data.data[index - 1].title;
+            getElements("album-name" + index.toString()).innerText = data.data[index - 1].album.title;
+            getElements("artist" + index.toString()).innerText = data.data[index - 1].artist.name;
+        }
     }
+    else{
+        document.getElementById("no-result").style.display='block';
+        document.getElementById("no-result").innerText="No Result Found!";
+    }    
 }//End of display search item function
 
 //geting elements by id
@@ -49,5 +56,5 @@ function displayLyrics(data, lyrics) {
     {
         getElements(lyrics).innerText = "Lyrics is Not Found!"; 
     }
-    document.getElementById(lyrics).style.display = 'block'
+    document.getElementById(lyrics).style.display = 'block';
 }// End of displayLyrics function
